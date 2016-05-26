@@ -9,7 +9,18 @@ app.set('view engine', 'ejs');
 app.use(express.static(process.cwd() + '/public'));
 
 app.get('/', function(req, res) {
-	res.render('index');
+	var inventoryItems = [];
+	firebase.once('value', function(snapshot){
+		snapshot.child('items').forEach(function (item){
+			var inventoryItem = item.val();
+			inventoryItem['id'] = item.key();
+			inventoryItems.push(inventoryItem);
+		});
+
+		res.render('index',{
+			items: inventoryItems
+		});
+	});
 });
 
 app.get('/add', function(req, res) {
