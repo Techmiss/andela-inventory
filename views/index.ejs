@@ -8,29 +8,55 @@
 
 		<h2> Welcome to Andela Inventory Management System</h2>
 		<a href="/add"> Add Item </a>
-		<table border="1" cellpadding="4">
-			<tr>
-				<th>Name</th>
-				<th>Description</th>
-				<th>Serial Number</th>
-				<th>Andela Serial Code</th>
-				<th>Date Bought</th>
-				<th></th>
-				<th></th>
-			</tr>
-			<% items.forEach(function(item) { %>
+		<% if (items.length > 0) { %>
+			<table border="1" cellpadding="4">
 				<tr>
-					<td><%= item.name %></td>
-					<td><%= item.description %></td>
-					<td><%= item.serialno %></td>
-					<td><%= item.serialcode %></td>
-					<td><%= item.date %></td>
-					<td><a href="/edit/<%= item.id %>">Edit</a></td>
-					<td><a href="/delete/<%= item.id %>">Delete</a></td>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Serial Number</th>
+					<th>Andela Serial Code</th>
+					<th>Date Bought</th>
+					<th></th>
+					<th></th>
+					<th></th>
 				</tr>
-			<% }); %>
-		</table>
+				<% items.forEach(function(item) { %>
+					<tr>
+						<td><%= item.name %></td>
+						<td><%= item.description %></td>
+						<td><%= item.serialno %></td>
+						<td><%= item.serialcode %></td>
+						<td><%= item.date %></td>
+						<td><a href="/edit/<%= item.id %>">Edit</a></td>
+						<td><a href="/delete/<%= item.id %>">Delete</a></td>
+						<td><a href="/missing/<%= item.id %>">Set as missing</a></td>
+					</tr>
+				<% }); %>
+			</table>
+		<% } %>
 
+		<% if (missingItems.length > 0) { %>
+			<table border="1" cellpadding="4">
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Serial Number</th>
+					<th>Andela Serial Code</th>
+					<th>Date Bought</th>
+					<th></th>
+				</tr>
+				<% missingItems.forEach(function(item) { %>
+					<tr>
+						<td><%= item.name %></td>
+						<td><%= item.description %></td>
+						<td><%= item.serialno %></td>
+						<td><%= item.serialcode %></td>
+						<td><%= item.date %></td>
+						<td><a href="/found/<%= item.id %>">Found</a></td>
+					</tr>
+				<% }); %>
+			</table>
+		<% } %>
 			
 	</body>
 </html>

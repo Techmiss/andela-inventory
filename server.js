@@ -10,15 +10,20 @@ app.use(express.static(process.cwd() + '/public'));
 
 app.get('/', function(req, res) {
 	var inventoryItems = [];
+	var missingItems = [];
 	firebase.once('value', function(snapshot){
 		snapshot.child('items').forEach(function (item){
 			var inventoryItem = item.val();
 			inventoryItem['id'] = item.key();
-			inventoryItems.push(inventoryItem);
+			if (!inventoryItem.missing)
+				inventoryItems.push(inventoryItem);
+			else
+				missingItems.push(inventoryItem);
 		});
 
 		res.render('index',{
-			items: inventoryItems
+			items: inventoryItems,
+			missingItems: missingItems
 		});
 	});
 });
@@ -57,12 +62,25 @@ app.get('/edit/:id', function (req, res){
 		});
 	});
 });
+
 app.post('/edit/:id', function (req, res){
 	var id = req.params.id;
 	var form = formidable.IncomingForm();
 	form.parse(req, function (err, fields, files){
 		firebase.child('items').child(id).update(fields);
 	});
+	res.redirect('/');
+});
+
+app.get('/missing/:id', function (req, res) {
+	var id = req.params.id;
+	firebase.child('items').child(id).child('missing').set(true);
+	res.redirect('/');
+});
+
+app.get('/found/:id', function (req, res){
+	var id = req.params.id;
+	firebase.child('items').child(id).child('missing').set(false);
 	res.redirect('/');
 });
 
