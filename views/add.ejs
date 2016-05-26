@@ -4,6 +4,27 @@
 		<title>Add Inventory Item</title>
 	</head>
 	<body>
-		
+		<h1>Add Inventory Item</h1>
+
+		<form method="POST" action="/add">
+
+			<label>Name:</label><br>
+			<input type="text" name="name" /><br/>
+
+			<label>Description:</label><br>
+			<input type="text" name="description" /><br>
+
+			<label>Serial No:</label><br>
+			<input type="text" name="serialno" /><br>
+
+			<label>Andela Serial Code:</label><br>
+			<input type="text" name="serialcode" /><br>
+
+			<label>Date Bought:</label><br>
+			<input type="text" name="date" /><br>
+
+			<input type="submit" value="Add Item">
+
+		</form>
 	</body>
 </html>
