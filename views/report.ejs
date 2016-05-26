@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Add Inventory Item</title>
+		<title> Report Lost Item</title>
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
 	</head>
 	<body>
-		<h1>Add Inventory Item</h1>
+		<h1>Report Lost Item</h1>
 
-		<form method="POST" action="/add">
+		<form method="POST" action="/report">
 
 			<label>Name:</label><br>
 			<input type="text" name="name" /><br/>
@@ -18,13 +18,10 @@
 			<label>Serial No:</label><br>
 			<input type="text" name="serialno" /><br>
 
-			<label>Andela Serial Code:</label><br>
-			<input type="text" name="serialcode" /><br>
-
-			<label>Date Bought:</label><br>
+			<label>Date reported lost:</label><br>
 			<input type="text" name="date" /><br>
 
-			<input type="submit" value="Add Item">
+			<input type="submit" value="Report Lost Item">
 
 		</form>
 	</body>

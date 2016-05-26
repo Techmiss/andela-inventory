@@ -1,0 +1,28 @@
+body {
+	border: 1px solid black;
+	height: 1800px;
+	widyh:2000px;
+	background-image:url("http://techcabal.com/wp-content/uploads/2015/02/Andela-006.55-e1423674318123.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+
+}
+h2 {font-family: verdana;
+	font-weight:bold;
+	color:#fff8dc;
+}
+table {
+	border-collapse: collapse;
+} 
+th{
+	background-color: #CC99FF;
+    color: black;
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 8px;
+}
+tr:nth-child(even) {background-color: #ff99ff}
+tr:nth-child(odd) {background-color: #ffccff}
+
+
