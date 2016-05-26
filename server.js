@@ -35,25 +35,12 @@ app.post('/add',function (req, res){
 	});
 	res.redirect('/');
 });
-app.get('/report', function(req, res) {
-	res.render('report');
-});
-app.post('/report',function (req, res){
-	var form = formidable.IncomingForm();
-	form.parse(req, function (err, fields, files) {
-		console.log(fields);
-	});
+
+app.get('/delete/:id', function (req, res) {
+	var id = req.params.id;
+	firebase.child('items').child(id).remove();
 	res.redirect('/');
 });
-app.get('/found', function(req, res) {
-	res.render('found');
-});
-app.post('/found',function (req, res){
-	var form = formidable.IncomingForm();
-	form.parse(req, function (err, fields, files) {
-		console.log(fields);
-	});
-	res.redirect('/');
-});
+
 app.listen(1994);
 console.log('Server listening on port 1994');
