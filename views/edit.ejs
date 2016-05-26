@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Edit Inventory Item</title>
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
+	</head>
+	<body>
+		<h1>Edit Item</h1>
+
+		<form method="POST" action="/edit/<%= id %>">
+
+			<label>Name:</label><br>
+			<input type="text" name="name" value="<%= item.name %>" /><br/>
+
+			<label>Description:</label><br>
+			<input type="text" name="description" value="<%= item.description %>" /><br/>
+
+			<label>Serial No:</label><br>
+			<input type="text" name="serialno" value="<%= item.serialno %>"/><br/>
+
+			<label>Andela Serial Code:</label><br>
+			<input type="text" name="serialcode" value="<%= item.serialcode %>"/><br/>
+
+			<label>Date Bought:</label><br>
+			<input type="text" name="date" value="<%= item.date %>"/><br/>
+
+			<input type="submit" value="Update Item">
+
+		</form>
+	</body>
+</html>

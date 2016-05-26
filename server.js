@@ -42,5 +42,29 @@ app.get('/delete/:id', function (req, res) {
 	res.redirect('/');
 });
 
+app.get('/edit/:id', function (req, res){
+	var id = req.params.id;
+	var inventoryItem = {};
+	firebase.once('value', function (snapshot){
+		snapshot.child('items').forEach(function (item){
+			if (item.key() == id)
+				inventoryItem = item.val();
+		});
+
+		res.render('edit',{
+			id:id,
+			item:inventoryItem
+		});
+	});
+});
+app.post('/edit/:id', function (req, res){
+	var id = req.params.id;
+	var form = formidable.IncomingForm();
+	form.parse(req, function (err, fields, files){
+		firebase.child('items').child(id).update(fields);
+	});
+	res.redirect('/');
+});
+
 app.listen(1994);
 console.log('Server listening on port 1994');
