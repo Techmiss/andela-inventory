@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sign In</title>
+		<link rel="stylesheet" type="text/css" href="/css/styles.css">
+	</head>
+	<body>
+		<div class="header">
+            <p>INVENTORY MANAGEMENT APP</p>
+        </div>
+
+        <div class="container">
+            <h3>Login to your account</h3>
+            <form method="POST" action="/login">
+                <input type="text" name="email" placeholder="Email" />
+                <input type="password" name="password" placeholder="Password" /><br/>
+                <input class="button" type="submit" value="Login">
+                <% if (error) { %>
+                    <p class="error-message">Invalid username or password</p>
+                <% } %>
+                <p><a href="/login">Register</a></p>      
+            </form>
+        </div>
+	</body>
+</html>

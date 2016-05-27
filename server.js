@@ -9,79 +9,113 @@ app.set('view engine', 'ejs');
 app.use(express.static(process.cwd() + '/public'));
 
 app.get('/', function(req, res) {
-	var inventoryItems = [];
-	var missingItems = [];
-	firebase.once('value', function(snapshot){
-		snapshot.child('items').forEach(function (item){
-			var inventoryItem = item.val();
-			inventoryItem['id'] = item.key();
-			if (!inventoryItem.missing)
-				inventoryItems.push(inventoryItem);
-			else
-				missingItems.push(inventoryItem);
-		});
+  var inventoryItems = [];
+  var missingItems = [];
+  firebase.once('value', function(snapshot){
+    snapshot.child('items').forEach(function (item){
+      var inventoryItem = item.val();
+      inventoryItem['id'] = item.key();
+      if (!inventoryItem.missing)
+        inventoryItems.push(inventoryItem);
+      else
+        missingItems.push(inventoryItem);
+    });
 
-		res.render('index',{
-			items: inventoryItems,
-			missingItems: missingItems
-		});
-	});
+    res.render('index',{
+      items: inventoryItems,
+      missingItems: missingItems
+    });
+  });
 });
 
 app.get('/add', function(req, res) {
-	res.render('add');
+  res.render('add');
 });
 
 app.post('/add',function (req, res){
-	var form = formidable.IncomingForm();
-	form.parse(req, function (err, fields, files) {
-		var inventoryItems = firebase.child('items');
-		inventoryItems.push(fields);
-	});
-	res.redirect('/');
+  var form = formidable.IncomingForm();
+  form.parse(req, function (err, fields, files) {
+    var inventoryItems = firebase.child('items');
+    inventoryItems.push(fields);
+  });
+  res.redirect('/');
 });
 
 app.get('/delete/:id', function (req, res) {
-	var id = req.params.id;
-	firebase.child('items').child(id).remove();
-	res.redirect('/');
+  var id = req.params.id;
+  firebase.child('items').child(id).remove();
+  res.redirect('/');
 });
 
 app.get('/edit/:id', function (req, res){
-	var id = req.params.id;
-	var inventoryItem = {};
-	firebase.once('value', function (snapshot){
-		snapshot.child('items').forEach(function (item){
-			if (item.key() == id)
-				inventoryItem = item.val();
-		});
+  var id = req.params.id;
+  var inventoryItem = {};
+  firebase.once('value', function (snapshot){
+    snapshot.child('items').forEach(function (item){
+      if (item.key() == id)
+        inventoryItem = item.val();
+    });
 
-		res.render('edit',{
-			id:id,
-			item:inventoryItem
-		});
-	});
+    res.render('edit',{
+      id:id,
+      item:inventoryItem
+    });
+  });
 });
 
 app.post('/edit/:id', function (req, res){
-	var id = req.params.id;
-	var form = formidable.IncomingForm();
-	form.parse(req, function (err, fields, files){
-		firebase.child('items').child(id).update(fields);
-	});
-	res.redirect('/');
+  var id = req.params.id;
+  var form = formidable.IncomingForm();
+  form.parse(req, function (err, fields, files){
+    firebase.child('items').child(id).update(fields);
+  });
+  res.redirect('/');
 });
 
 app.get('/missing/:id', function (req, res) {
-	var id = req.params.id;
-	firebase.child('items').child(id).child('missing').set(true);
-	res.redirect('/');
+  var id = req.params.id;
+  firebase.child('items').child(id).child('missing').set(true);
+  res.redirect('/');
 });
 
 app.get('/found/:id', function (req, res){
-	var id = req.params.id;
-	firebase.child('items').child(id).child('missing').set(false);
-	res.redirect('/');
+  var id = req.params.id;
+  firebase.child('items').child(id).child('missing').set(false);
+  res.redirect('/');
+});
+
+app.get('/register', function (req, res){
+  res.render('register');
+});
+
+app.post('/register', function (req, res) {
+  var form = formidable.IncomingForm();
+  form.parse(req, function (err, fields, files) {
+    firebase.createUser(fields)
+  });
+    
+  res.redirect('/');
+});
+
+app.get('/login', function (req, res){
+  res.render('login', {
+    error: false
+  });
+});
+
+app.post('/login', function (req, res) {
+  var form = formidable.IncomingForm();
+  form.parse(req, function (err, fields, files) {
+    firebase.authWithPassword(fields, function (error, authData) {
+      if (error) {
+          res.render('login', {
+              error: true
+          });
+      } else {
+          res.redirect('/');
+      }
+    });
+  });
 });
 
 app.listen(1994);

@@ -6,63 +6,63 @@
 	</head>
 	<body>
     
-        <div class="header">
-            <p>INVENTORY MANAGEMENT APP</p>
-        </div>
-        
-        <div class="container">
-            <a class="button right" href="/add"> Add Item </a>
-            <% if (items.length > 0) { %>
-                <table cellspacing="0">
-                    <caption>INVENTORY ITEMS</caption>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Serial Number</th>
-                        <th>Andela Serial Code</th>
-                        <th>Date Bought</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <% items.forEach(function(item) { %>
-                        <tr>
-                            <td><%= item.name %></td>
-                            <td><%= item.description %></td>
-                            <td><%= item.serialno %></td>
-                            <td><%= item.serialcode %></td>
-                            <td><%= item.date %></td>
-                            <td><a href="/edit/<%= item.id %>">Edit</a></td>
-                            <td><a href="/delete/<%= item.id %>">Delete</a></td>
-                            <td><a href="/missing/<%= item.id %>">Set as missing</a></td>
-                        </tr>
-                    <% }); %>
-                </table>
-            <% } %>
+    <div class="header">
+      <p>INVENTORY MANAGEMENT APP</p>
+    </div>
+      
+    <div class="container">
+      <a class="button right" href="/add"> Add Item </a>
+      <% if (items.length > 0) { %>
+        <table cellspacing="0">
+          <caption>INVENTORY ITEMS</caption>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Serial Number</th>
+            <th>Andela Serial Code</th>
+            <th>Date Bought</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+            <% items.forEach(function(item) { %>
+              <tr>
+                <td><%= item.name %></td>
+                  <td><%= item.description %></td>
+                  <td><%= item.serialno %></td>
+                  <td><%= item.serialcode %></td>
+                  <td><%= item.date %></td>
+                  <td><a href="/edit/<%= item.id %>">Edit</a></td>
+                  <td><a href="/delete/<%= item.id %>">Delete</a></td>
+                  <td><a href="/missing/<%= item.id %>">Set as missing</a></td>
+              </tr>
+            <% }); %>
+        </table>
+      <% } %>
 
-            <% if (missingItems.length > 0) { %>
-                <table cellspacing="0">
-                    <caption>MISSING ITEMS</caption>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Serial Number</th>
-                        <th>Andela Serial Code</th>
-                        <th>Date Bought</th>
-                        <th></th>
-                    </tr>
-                    <% missingItems.forEach(function(item) { %>
-                        <tr>
-                            <td><%= item.name %></td>
-                            <td><%= item.description %></td>
-                            <td><%= item.serialno %></td>
-                            <td><%= item.serialcode %></td>
-                            <td><%= item.date %></td>
-                            <td><a href="/found/<%= item.id %>">Found</a></td>
-                        </tr>
-                    <% }); %>
-                </table>
-            <% } %>
-	    </div>
+      <% if (missingItems.length > 0) { %>
+        <table cellspacing="0">
+          <caption>MISSING ITEMS</caption>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Serial Number</th>
+            <th>Andela Serial Code</th>
+            <th>Date Bought</th>
+            <th></th>
+          </tr>
+          <% missingItems.forEach(function(item) { %>
+            <tr>
+              <td><%= item.name %></td>
+              <td><%= item.description %></td>
+              <td><%= item.serialno %></td>
+              <td><%= item.serialcode %></td>
+              <td><%= item.date %></td>
+              <td><a href="/found/<%= item.id %>">Found</a></td>
+            </tr>
+          <% }); %>
+        </table>
+      <% } %>
+    </div>
 	</body>
 </html>
