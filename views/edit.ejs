@@ -2,30 +2,30 @@
 <html>
 	<head>
 		<title>Edit Inventory Item</title>
-		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		<link rel="stylesheet" type="text/css" href="/css/styles.css">
 	</head>
 	<body>
-		<h1>Edit Item</h1>
+		<div class="header">
+            <p>INVENTORY MANAGEMENT APP</p>
+        </div>
 
-		<form method="POST" action="/edit/<%= id %>">
+        <div class="container">
+            <h3>Edit Inventory Item</h3>
+            <form method="POST" action="/edit/<%= id %>">
 
-			<label>Name:</label><br>
-			<input type="text" name="name" value="<%= item.name %>" /><br/>
+                <input type="text" name="name" value="<%= item.name %>" placeholder="Name" />
 
-			<label>Description:</label><br>
-			<input type="text" name="description" value="<%= item.description %>" /><br/>
+                <input type="text" name="description" value="<%= item.description %>" placeholder="Description" />
 
-			<label>Serial No:</label><br>
-			<input type="text" name="serialno" value="<%= item.serialno %>"/><br/>
+                <input type="text" name="serialno" value="<%= item.serialno %>" placeholder="Serial No"/>
 
-			<label>Andela Serial Code:</label><br>
-			<input type="text" name="serialcode" value="<%= item.serialcode %>"/><br/>
+                <input type="text" name="serialcode" value="<%= item.serialcode %>" placeholder="Serial Code"/>
 
-			<label>Date Bought:</label><br>
-			<input type="text" name="date" value="<%= item.date %>"/><br/>
+                <input type="text" name="date" value="<%= item.date %>" placeholder="Date (dd/mm/yyyy)"/><br/>
 
-			<input type="submit" value="Update Item">
+                <input class="button" type="submit" value="Update Item">
 
-		</form>
+            </form>
+        </div>
 	</body>
 </html>
