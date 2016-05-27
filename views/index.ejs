@@ -7,7 +7,7 @@
 	<body>
     
     <div class="header">
-      <p>INVENTORY MANAGEMENT APP</p>
+      <p><a href='/'>INVENTORY MANAGEMENT APP</a></p>
     </div>
       
     <div class="container">
@@ -25,18 +25,18 @@
             <th></th>
             <th></th>
           </tr>
-            <% items.forEach(function(item) { %>
-              <tr>
-                <td><%= item.name %></td>
-                  <td><%= item.description %></td>
-                  <td><%= item.serialno %></td>
-                  <td><%= item.serialcode %></td>
-                  <td><%= item.date %></td>
-                  <td><a href="/edit/<%= item.id %>">Edit</a></td>
-                  <td><a href="/delete/<%= item.id %>">Delete</a></td>
-                  <td><a href="/missing/<%= item.id %>">Set as missing</a></td>
-              </tr>
-            <% }); %>
+          <% items.forEach(function(item) { %>
+            <tr>
+              <td><%= item.name %></td>
+              <td><%= item.description %></td>
+              <td><%= item.serialno %></td>
+              <td><%= item.serialcode %></td>
+              <td><%= item.date %></td>
+              <td><a href="/edit/<%= item.id %>">Edit</a></td>
+              <td><a href="/delete/<%= item.id %>">Delete</a></td>
+              <td><a href="/missing/<%= item.id %>">Set as missing</a></td>
+            </tr>
+          <% }); %>
         </table>
       <% } %>
 
@@ -58,7 +58,7 @@
               <td><%= item.serialno %></td>
               <td><%= item.serialcode %></td>
               <td><%= item.date %></td>
-              <td><a href="/found/<%= item.id %>">Found</a></td>
+              <td><a href="/found/<%= item.id %>">Set as Found</a></td>
             </tr>
           <% }); %>
         </table>
